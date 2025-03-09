@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - CodeFlow Mastery</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body x-data="{ darkMode: false, mobileMenu: false }" :class="darkMode ? 'dark' : 'light'">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="favicon.svg" alt="CodeFlow" class="w-8 h-8">
+                        <h1 class="text-xl font-bold ml-2">odeFlow Mastery</h1>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="workshops.html" class="nav-link">Workshops</a>
+                    <a href="courses.html" class="nav-link">Courses</a>
+                    <a href="tools.html" class="nav-link">Tools</a>
+                    <a href="analytics.html" class="nav-link">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Sign In</a>
+                </div>
+                <div class="md:hidden">
+                    <button @click="mobileMenu = !mobileMenu" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="mobileMenu ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" class="md:hidden bg-white border-t">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="workshops.html" class="nav-link block">Workshops</a>
+                    <a href="courses.html" class="nav-link block">Courses</a>
+                    <a href="tools.html" class="nav-link block">Tools</a>
+                    <a href="analytics.html" class="nav-link block">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300 text-center">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Support Center</h1>
+                <p class="text-xl text-gray-600 mb-8">We're here to help you succeed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Content -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Contact Options -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="glass-card p-6 rounded-lg text-center">
+                    <div class="text-3xl mb-4"><i class="fas fa-comments text-blue-500"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Live Chat</h3>
+                    <p class="text-gray-600 mb-4">Get instant help from our support team</p>
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">Start Chat</button>
+                </div>
+                <div class="glass-card p-6 rounded-lg text-center">
+                    <div class="text-3xl mb-4"><i class="fas fa-envelope text-blue-500"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Email Support</h3>
+                    <p class="text-gray-600 mb-4">Send us your questions anytime</p>
+                    <a href="mailto:support@codeflow.dev" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors inline-block">Email Us</a>
+                </div>
+                <div class="glass-card p-6 rounded-lg text-center">
+                    <div class="text-3xl mb-4"><i class="fas fa-phone text-blue-500"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Phone Support</h3>
+                    <p class="text-gray-600 mb-4">Talk to us directly</p>
+                    <a href="tel:+1234567890" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors inline-block">Call Now</a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold mb-8">Frequently Asked Questions</h2>
+                <div class="space-y-4">
+                    <div class="border rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">How do I get started?</h3>
+                        <p class="text-gray-600">Sign up for an account and follow our getting started guide in the documentation.</p>
+                    </div>
+                    <div class="border rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">What payment methods do you accept?</h3>
+                        <p class="text-gray-600">We accept all major credit cards, PayPal, and bank transfers.</p>
+                    </div>
+                    <div class="border rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Can I upgrade my plan later?</h3>
+                        <p class="text-gray-600">Yes, you can upgrade or downgrade your plan at any time from your account settings.</p>
+                    </div>
+                    <div class="border rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-2">Do you offer refunds?</h3>
+                        <p class="text-gray-600">Yes, we offer a 30-day money-back guarantee for all our paid plans.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support Form -->
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8">Contact Support</h2>
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="name">Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="email">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="subject">Subject</label>
+                        <input type="text" id="subject" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="message">Message</label>
+                        <textarea id="message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-black text-white py-3 rounded-lg hover:bg-white hover:text-black transition-colors">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="CodeFlow" class="w-6 h-6">
+                        <span class="text-xl font-bold">odeFlow Mastery</span>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <div class="space-y-2">
+                        <a href="documentation.html" class="nav-link block">Documentation</a>
+                        <a href="api-reference.html" class="nav-link block">API Reference</a>
+                        <a href="community.html" class="nav-link block">Community</a>
+                        <a href="support.html" class="nav-link block">Support</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <div class="space-y-2">
+                        <a href="about.html" class="nav-link block">About Us</a>
+                        <a href="blog.html" class="nav-link block">Blog</a>
+                        <a href="careers.html" class="nav-link block">Careers</a>
+                        <a href="contact.html" class="nav-link block">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 odeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#3B82F6" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#3B82F6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Animate elements on scroll
+        gsap.from(".animate-on-scroll", {
+            scrollTrigger: { trigger: ".animate-on-scroll", start: "top 80%" },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CodeFlow Mastery</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body x-data="{ darkMode: false, mobileMenu: false }" :class="darkMode ? 'dark' : 'light'">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="favicon.svg" alt="CodeFlow" class="w-8 h-8">
+                        <h1 class="text-xl font-bold ml-2">odeFlow Mastery</h1>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="workshops.html" class="nav-link">Workshops</a>
+                    <a href="courses.html" class="nav-link">Courses</a>
+                    <a href="tools.html" class="nav-link">Tools</a>
+                    <a href="analytics.html" class="nav-link">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Sign In</a>
+                </div>
+                <div class="md:hidden">
+                    <button @click="mobileMenu = !mobileMenu" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="mobileMenu ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" class="md:hidden bg-white border-t">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="workshops.html" class="nav-link block">Workshops</a>
+                    <a href="courses.html" class="nav-link block">Courses</a>
+                    <a href="tools.html" class="nav-link block">Tools</a>
+                    <a href="analytics.html" class="nav-link block">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300 text-center">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
+                <p class="text-xl text-gray-600 mb-8">Empowering developers to master their craft</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Our Story -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8">Our Story</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <p class="text-gray-600 mb-6">
+                            CodeFlow Mastery was founded in 2023 with a simple mission: to make project management
+                            and development workflows more efficient and enjoyable for developers worldwide.
+                        </p>
+                        <p class="text-gray-600">
+                            What started as a small tool for internal use has grown into a comprehensive platform
+                            used by thousands of developers and teams globally.
+                        </p>
+                    </div>
+                    <div class="order-first md:order-last">
+                        <img src="https://via.placeholder.com/600x400" alt="Our Story" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Values -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8">Our Values</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-6 rounded-lg">
+                        <div class="text-3xl mb-4 text-blue-500">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Innovation</h3>
+                        <p class="text-gray-600">
+                            We constantly push the boundaries of what's possible in development workflows.
+                        </p>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg">
+                        <div class="text-3xl mb-4 text-blue-500">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Community</h3>
+                        <p class="text-gray-600">
+                            We believe in the power of community and collaborative learning.
+                        </p>
+                    </div>
+                    <div class="glass-card p-6 rounded-lg">
+                        <div class="text-3xl mb-4 text-blue-500">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Quality</h3>
+                        <p class="text-gray-600">
+                            We maintain the highest standards in everything we create.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8">Our Team</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/200" alt="Team Member" class="rounded-full mx-auto mb-4">
+                        <h3 class="font-bold mb-1">John Smith</h3>
+                        <p class="text-gray-600">CEO & Founder</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/200" alt="Team Member" class="rounded-full mx-auto mb-4">
+                        <h3 class="font-bold mb-1">Sarah Johnson</h3>
+                        <p class="text-gray-600">CTO</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/200" alt="Team Member" class="rounded-full mx-auto mb-4">
+                        <h3 class="font-bold mb-1">Michael Chen</h3>
+                        <p class="text-gray-600">Head of Design</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://via.placeholder.com/200" alt="Team Member" class="rounded-full mx-auto mb-4">
+                        <h3 class="font-bold mb-1">Emma Davis</h3>
+                        <p class="text-gray-600">Head of Engineering</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Join Us -->
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-4">Join Our Journey</h2>
+                <p class="text-gray-600 mb-8">
+                    We're always looking for talented individuals to join our team.
+                </p>
+                <a href="careers.html" class="bg-black text-white px-8 py-3 rounded-lg hover:bg-white hover:text-black transition-colors inline-block">
+                    View Open Positions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="CodeFlow" class="w-6 h-6">
+                        <span class="text-xl font-bold">odeFlow Mastery</span>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <div class="space-y-2">
+                        <a href="documentation.html" class="nav-link block">Documentation</a>
+                        <a href="api-reference.html" class="nav-link block">API Reference</a>
+                        <a href="community.html" class="nav-link block">Community</a>
+                        <a href="support.html" class="nav-link block">Support</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <div class="space-y-2">
+                        <a href="about.html" class="nav-link block">About Us</a>
+                        <a href="blog.html" class="nav-link block">Blog</a>
+                        <a href="careers.html" class="nav-link block">Careers</a>
+                        <a href="contact.html" class="nav-link block">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 odeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#3B82F6" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#3B82F6", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        // Animate elements on scroll
+        gsap.from(".animate-on-scroll", {
+            scrollTrigger: { trigger: ".animate-on-scroll", start: "top 80%" },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2
+        });
+    </script>
+</body>
+</html>

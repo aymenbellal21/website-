@@ -1,0 +1,101 @@
+:root {
+    --primary-light: #2563eb;
+    --bg-light: #f8fafc;
+    --text-light: #1e293b;
+    --primary-dark: #3b82f6;
+    --bg-dark: #0f172a;
+    --text-dark: #f8fafc;
+}
+
+.dark {
+    --primary: var(--primary-dark);
+    --bg: var(--bg-dark);
+    --text: var(--text-dark);
+}
+
+.light {
+    --primary: var(--primary-light);
+    --bg: var(--bg-light);
+    --text: var(--text-light);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.feature-card {
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.code-window {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Fira Code', monospace;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+.get-started-btn {
+    background-color: black;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: white;
+    color: black;
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - CodeFlow Mastery</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body x-data="{ darkMode: false, mobileMenu: false }" :class="darkMode ? 'dark' : 'light'">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="favicon.svg" alt="odeFlow" class="w-8 h-8">
+                        <h1 class="text-xl font-bold ml-2">odeFlow Mastery</h1>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="workshops.html" class="nav-link">Workshops</a>
+                    <a href="courses.html" class="nav-link">Courses</a>
+                    <a href="tools.html" class="nav-link">Tools</a>
+                    <a href="analytics.html" class="nav-link">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">Sign In</a>
+                </div>
+                <div class="md:hidden">
+                    <button @click="mobileMenu = !mobileMenu" class="p-2 rounded-lg hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="mobileMenu ? 'fa-times' : 'fa-bars'"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" class="md:hidden bg-white border-t">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="workshops.html" class="nav-link block">Workshops</a>
+                    <a href="courses.html" class="nav-link block">Courses</a>
+                    <a href="tools.html" class="nav-link block">Tools</a>
+                    <a href="analytics.html" class="nav-link block">Analytics</a>
+                    <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 focus:outline-none">
+                        <i class="fas" :class="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                    <a href="auth.html" class="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300 text-center">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Blog</h1>
+                <p class="text-xl text-gray-600 mb-8">Insights, tutorials, and updates from our team</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <!-- Featured Post -->
+            <div class="mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-blue-500 font-semibold">Featured</span>
+                        <h2 class="text-3xl font-bold mb-4 mt-2">The Future of AI in Project Management</h2>
+                        <p class="text-gray-600 mb-6">
+                            Explore how artificial intelligence is revolutionizing the way we manage software projects
+                            and what this means for developers and teams.
+                        </p>
+                        <div class="flex items-center mb-6">
+                            <img src="https://via.placeholder.com/40" alt="Author" class="rounded-full mr-3">
+                            <div>
+                                <p class="font-semibold">John Smith</p>
+                                <p class="text-gray-500 text-sm">Jan 15, 2025 · 10 min read</p>
+                            </div>
+                        </div>
+                        <a href="#" class="bg-black text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black transition-colors inline-block">
+                            Read More
+                        </a>
+                    </div>
+                    <div class="order-first md:order-last">
+                        <img src="https://via.placeholder.com/600x400" alt="Featured Post" class="rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Latest Posts -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8">Latest Posts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Post 1 -->
+                    <div class="glass-card rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400x250" alt="Post" class="w-full">
+                        <div class="p-6">
+                            <span class="text-blue-500 text-sm font-semibold">Tutorial</span>
+                            <h3 class="text-xl font-bold mb-2 mt-1">Getting Started with odeFlow</h3>
+                            <p class="text-gray-600 mb-4">
+                                A comprehensive guide to setting up your first project with odeFlow Mastery.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://via.placeholder.com/30" alt="Author" class="rounded-full mr-2">
+                                    <span class="text-sm text-gray-500">Sarah Johnson</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Jan 10, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="glass-card rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400x250" alt="Post" class="w-full">
+                        <div class="p-6">
+                            <span class="text-blue-500 text-sm font-semibold">Tips & Tricks</span>
+                            <h3 class="text-xl font-bold mb-2 mt-1">10 Project Management Hacks</h3>
+                            <p class="text-gray-600 mb-4">
+                                Boost your productivity with these essential project management techniques.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://via.placeholder.com/30" alt="Author" class="rounded-full mr-2">
+                                    <span class="text-sm text-gray-500">Michael Chen</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Jan 8, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post 3 -->
+                    <div class="glass-card rounded-lg overflow-hidden">
+                        <img src="https://via.placeholder.com/400x250" alt="Post" class="w-full">
+                        <div class="p-6">
+                            <span class="text-blue-500 text-sm font-semibold">Case Study</span>
+                            <h3 class="text-xl font-bold mb-2 mt-1">Success Story: Team Collaboration</h3>
+                            <p class="text-gray-600 mb-4">
+                                How a team of 50 developers streamlined their workflow using odeFlow.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://via.placeholder.com/30" alt="Author" class="rounded-full mr-2">
+                                    <span class="text-sm text-gray-500">Emma Davis</span>
+                                </div>
+                                <span class="text-sm text-gray-500">Jan 5, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="mb-20">
+                <h2 class="text-3xl font-bold mb-8">Categories</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="#" class="glass-card p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <i class="fas fa-laptop-code text-3xl text-blue-500 mb-2"></i>
+                        <h3 class="font-bold">Tutorials</h3>
+                        <p class="text-gray-500">24 posts</p>
+                    </a>
+                    <a href="#" class="glass-card p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <i class="fas fa-lightbulb text-3xl text-blue-500 mb-2"></i>
+                        <h3 class="font-bold">Tips & Tricks</h3>
+                        <p class="text-gray-500">18 posts</p>
+                    </a>
+                    <a href="#" class="glass-card p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <i class="fas fa-chart-line text-3xl text-blue-500 mb-2"></i>
+                        <h3 class="font-bold">Case Studies</h3>
+                        <p class="text-gray-500">12 posts</p>
+                    </a>
+                    <a href="#" class="glass-card p-6 rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <i class="fas fa-newspaper text-3xl text-blue-500 mb-2"></i>
+                        <h3 class="font-bold">News</h3>
+                        <p class="text-gray-500">30 posts</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+                <p class="text-gray-600 mb-8">
+                    Subscribe to our newsletter to receive the latest updates and articles.
+                </p>
+                <form class="max-w-md mx-auto">
+                    <div class="flex gap-4">
+                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+                        <button type="submit" class="bg-black text-white px-6 py-2 rounded-lg hover:bg-white hover:text-black transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="odeFlow" class="w-6 h-6">
+                        <span class="text-xl font-bold">odeFlow Mastery</span>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <div class="space-y-2">
+                        <a href="documentation.html" class="nav-link block">Documentation</a>
+                        <a href="api-reference.html" class="nav-link block">API Reference</a>
+                        <a href="community.html" class="nav-link block">Community</a>
+                        <a href="support.html" class="nav-link block">Support</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <div class="space-y-2">
+                        <a href="about.html" class="nav-link block">About Us</a>
+                        <a href="blog.html" class="nav-link block">Blog</a>
+                        <a href="careers.html" class="nav-link block">Careers</a>
+                        <a href="contact.html" class="nav-link block">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 odeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

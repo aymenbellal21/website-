@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - CodeFlow Mastery</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body x-data="{ darkMode: false, mobileMenu: false }" :class="darkMode ? 'dark' : 'light'">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center">
+                    <img src="favicon.svg" alt="C" class="w-8 h-8">
+                    <span class="text-xl font-bold">odeFlow Mastery</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" @click="mobileMenu = !mobileMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="workshops.html" class="nav-link">Workshops</a>
+                    <a href="courses.html" class="nav-link">Courses</a>
+                    <a href="tools.html" class="nav-link">Tools</a>
+                    <a href="analytics.html" class="nav-link">Analytics</a>
+                    <a href="auth.html" class="px-6 py-3 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors">Sign In</a>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg transition-transform duration-300"
+                     :class="{'translate-y-0 opacity-100 visible': mobileMenu, '-translate-y-full opacity-0 invisible': !mobileMenu}">
+                    <div class="container mx-auto px-6 py-4 space-y-4">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                        <a href="auth.html" class="block px-6 py-3 bg-black text-white text-center rounded-lg hover:bg-white hover:text-black transition-colors">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold mb-8 leading-tight">
+                    Project <span class="text-primary">Analytics</span> Dashboard
+                </h1>
+                <p class="text-xl mb-8">
+                    Track your development progress and team performance with powerful analytics tools
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Metrics Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <!-- Code Quality Score -->
+                <div class="glass-card p-8 text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Code Quality</h3>
+                    <div class="text-4xl font-bold text-primary">94%</div>
+                    <p class="mt-2 text-sm">+5% from last month</p>
+                </div>
+
+                <!-- Team Velocity -->
+                <div class="glass-card p-8 text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Team Velocity</h3>
+                    <div class="text-4xl font-bold text-primary">87</div>
+                    <p class="mt-2 text-sm">Story points per sprint</p>
+                </div>
+
+                <!-- Bug Resolution -->
+                <div class="glass-card p-8 text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Bug Resolution</h3>
+                    <div class="text-4xl font-bold text-primary">98%</div>
+                    <p class="mt-2 text-sm">Within SLA timeframe</p>
+                </div>
+
+                <!-- Team Efficiency -->
+                <div class="glass-card p-8 text-center">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Efficiency</h3>
+                    <div class="text-4xl font-bold text-primary">92%</div>
+                    <p class="mt-2 text-sm">Resource utilization</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Sprint Progress Chart -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-6">Sprint Progress</h3>
+                    <canvas id="sprintChart" width="400" height="300"></canvas>
+                </div>
+
+                <!-- Code Quality Trends -->
+                <div class="glass-card p-8">
+                    <h3 class="text-2xl font-bold mb-6">Code Quality Trends</h3>
+                    <canvas id="qualityChart" width="400" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Analytics -->
+    <section class="py-20 bg-gradient-to-b from-transparent to-primary/5">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Detailed Analytics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Performance Metrics -->
+                <div class="feature-card glass-card p-8">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Performance Metrics</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center">
+                            <span>Load Time</span>
+                            <span class="text-primary font-bold">1.2s</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Response Time</span>
+                            <span class="text-primary font-bold">0.8s</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Uptime</span>
+                            <span class="text-primary font-bold">99.9%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Code Analysis -->
+                <div class="feature-card glass-card p-8">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Code Analysis</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center">
+                            <span>Code Coverage</span>
+                            <span class="text-primary font-bold">92%</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Technical Debt</span>
+                            <span class="text-primary font-bold">3.2%</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Code Duplication</span>
+                            <span class="text-primary font-bold">1.5%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Team Metrics -->
+                <div class="feature-card glass-card p-8">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Team Metrics</h3>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center">
+                            <span>Productivity</span>
+                            <span class="text-primary font-bold">95%</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Collaboration</span>
+                            <span class="text-primary font-bold">88%</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Task Completion</span>
+                            <span class="text-primary font-bold">93%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8">Ready to Improve Your Team's Performance?</h2>
+            <p class="text-xl mb-12">Get detailed insights into your development process and team efficiency.</p>
+            <a href="#" class="inline-block">
+                <button class="px-12 py-6 bg-black text-white rounded-lg text-xl hover:bg-white hover:text-black transition-colors get-started-btn">
+                    Start Analyzing
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="C" class="w-6 h-6">
+                        <span class="text-xl font-bold">odeFlow Mastery</span>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <div class="space-y-2">
+                        <a href="documentation.html" class="nav-link block">Documentation</a>
+                        <a href="api-reference.html" class="nav-link block">API Reference</a>
+                        <a href="community.html" class="nav-link block">Community</a>
+                        <a href="support.html" class="nav-link block">Support</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <div class="space-y-2">
+                        <a href="about.html" class="nav-link block">About Us</a>
+                        <a href="blog.html" class="nav-link block">Blog</a>
+                        <a href="careers.html" class="nav-link block">Careers</a>
+                        <a href="contact.html" class="nav-link block">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 CodeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize charts when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sprint Progress Chart
+            const sprintCtx = document.getElementById('sprintChart').getContext('2d');
+            new Chart(sprintCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Completed Tasks',
+                        data: [12, 25, 38, 45],
+                        borderColor: '#2563eb',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            // Code Quality Chart
+            const qualityCtx = document.getElementById('qualityChart').getContext('2d');
+            new Chart(qualityCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+                    datasets: [{
+                        label: 'Code Quality Score',
+                        data: [85, 88, 92, 94],
+                        backgroundColor: '#2563eb',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

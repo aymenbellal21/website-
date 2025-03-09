@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register - CodeFlow Mastery</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            padding-bottom: 2px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #3B82F6;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body x-data="{ darkMode: false, activeTab: 'login', mobileMenu: false }" :class="darkMode ? 'dark' : 'light'">
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center">
+                    <img src="favicon.svg" alt="C" class="w-8 h-8">
+                    <span class="text-xl font-bold">odeFlow Mastery</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden" @click="mobileMenu = !mobileMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="workshops.html" class="nav-link">Workshops</a>
+                    <a href="courses.html" class="nav-link">Courses</a>
+                    <a href="tools.html" class="nav-link">Tools</a>
+                    <a href="analytics.html" class="nav-link">Analytics</a>
+                    <a href="auth.html" class="px-6 py-3 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors">Sign In</a>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg transition-transform duration-300"
+                     :class="{'translate-y-0 opacity-100 visible': mobileMenu, '-translate-y-full opacity-0 invisible': !mobileMenu}">
+                    <div class="container mx-auto px-6 py-4 space-y-4">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                        <a href="auth.html" class="block px-6 py-3 bg-black text-white text-center rounded-lg hover:bg-white hover:text-black transition-colors">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Auth Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6">
+            <div class="max-w-md mx-auto">
+                <!-- Auth Tabs -->
+                <div class="flex mb-8">
+                    <button 
+                        @click="activeTab = 'login'" 
+                        :class="{'bg-black text-white': activeTab === 'login', 'bg-transparent': activeTab !== 'login'}"
+                        class="flex-1 py-3 rounded-l-lg transition-colors">
+                        Login
+                    </button>
+                    <button 
+                        @click="activeTab = 'register'" 
+                        :class="{'bg-black text-white': activeTab === 'register', 'bg-transparent': activeTab !== 'register'}"
+                        class="flex-1 py-3 rounded-r-lg transition-colors">
+                        Register
+                    </button>
+                </div>
+
+                <!-- Auth Forms -->
+                <div class="glass-card p-8">
+                    <!-- Login Form -->
+                    <form x-show="activeTab === 'login'" @submit.prevent="handleLogin" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <label class="text-sm">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm text-primary hover:underline">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <!-- Register Form -->
+                    <form x-show="activeTab === 'register'" @submit.prevent="handleRegister" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Full Name</label>
+                            <input type="text" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Password</label>
+                            <input type="password" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Confirm Password</label>
+                            <input type="password" required class="w-full px-4 py-2 rounded-lg bg-white/10 backdrop-blur-sm border border-gray-300 focus:outline-none focus:border-primary">
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" required class="mr-2">
+                            <label class="text-sm">I agree to the Terms of Service and Privacy Policy</label>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-black text-white rounded-lg hover:bg-white hover:text-black transition-colors">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <!-- Email Verification Message -->
+                    <div x-show="false" class="text-center space-y-4 hidden">
+                        <i class="fas fa-envelope-open-text text-5xl text-primary"></i>
+                        <h3 class="text-xl font-bold">Verify Your Email</h3>
+                        <p>We've sent a verification link to your email address. Please check your inbox and click the link to activate your account.</p>
+                        <p class="text-sm">Didn't receive the email? <a href="#" class="text-primary hover:underline">Resend verification</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="C" class="w-8 h-8">
+                        <h3 class="text-xl font-bold">odeFlow Mastery</h3>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="workshops.html" class="nav-link block">Workshops</a>
+                        <a href="courses.html" class="nav-link block">Courses</a>
+                        <a href="tools.html" class="nav-link block">Tools</a>
+                        <a href="analytics.html" class="nav-link block">Analytics</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <div class="space-y-2">
+                        <a href="documentation.html" class="nav-link block">Documentation</a>
+                        <a href="api-reference.html" class="nav-link block">API Reference</a>
+                        <a href="community.html" class="nav-link block">Community</a>
+                        <a href="support.html" class="nav-link block">Support</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <div class="space-y-2">
+                        <a href="about.html" class="nav-link block">About Us</a>
+                        <a href="blog.html" class="nav-link block">Blog</a>
+                        <a href="careers.html" class="nav-link block">Careers</a>
+                        <a href="contact.html" class="nav-link block">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 CodeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Handle login submission
+        function handleLogin(event) {
+            // Add login logic here
+            alert('Please check your email and password.');
+        }
+
+        // Handle registration submission
+        function handleRegister(event) {
+            // Add registration logic here
+            alert('Please check your email for verification link.');
+        }
+    </script>
+</body>
+</html>

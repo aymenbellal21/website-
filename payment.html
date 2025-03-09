@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - odeFlow Mastery</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <img src="favicon.svg" alt="odeFlow" class="w-8 h-8">
+                        <h1 class="text-xl font-bold ml-2">odeFlow Mastery</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Payment Section -->
+    <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8">
+                <h2 class="text-3xl font-bold text-center mb-8">Complete Your Payment</h2>
+                
+                <!-- Order Summary -->
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-lg font-semibold mb-4">Order Summary</h3>
+                    <div class="flex justify-between mb-2">
+                        <span>Course/Path Name:</span>
+                        <span id="courseName" class="font-semibold">Advanced AI Development</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span>Price:</span>
+                        <span id="coursePrice" class="font-semibold">$99.99</span>
+                    </div>
+                    <div class="border-t pt-2 mt-2">
+                        <div class="flex justify-between">
+                            <span class="font-semibold">Total:</span>
+                            <span id="totalPrice" class="font-semibold">$99.99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="space-y-6">
+                    <h3 class="text-lg font-semibold mb-4">Select Payment Method</h3>
+                    
+                    <!-- Credit/Debit Cards -->
+                    <div class="border rounded-lg p-4 hover:border-blue-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment-method" id="card" class="mr-3">
+                            <label for="card" class="flex items-center">
+                                <span class="mr-4">Credit/Debit Card</span>
+                                <div class="flex space-x-2">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-8">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-8">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PayPal -->
+                    <div class="border rounded-lg p-4 hover:border-blue-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment-method" id="paypal" class="mr-3">
+                            <label for="paypal" class="flex items-center">
+                                <span class="mr-4">PayPal</span>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-8">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- MetaMask -->
+                    <div class="border rounded-lg p-4 hover:border-blue-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment-method" id="metamask" class="mr-3">
+                            <label for="metamask" class="flex items-center">
+                                <span class="mr-4">MetaMask Wallet</span>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask" class="h-8">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Algeria Post (CCP) -->
+                    <div class="border rounded-lg p-4 hover:border-blue-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment-method" id="ccp" class="mr-3">
+                            <label for="ccp" class="flex items-center">
+                                <span class="mr-4">Algeria Post (CCP)</span>
+                                <img src="https://e-ccp.poste.dz/assets/images/logo.png" alt="CCP" class="h-8">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BaridiMob -->
+                    <div class="border rounded-lg p-4 hover:border-blue-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment-method" id="baridimob" class="mr-3">
+                            <label for="baridimob" class="flex items-center">
+                                <span class="mr-4">BaridiMob</span>
+                                <img src="https://play-lh.googleusercontent.com/Vz6m4iAxnVIcQrIi4Pkbfz1kjR1ZPYcuWTkRNS8RHe-sZUvYyk5gZQQtxKIpRXao1w=w240-h480-rw" alt="BaridiMob" class="h-8">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <div id="payment-form" class="mt-8 space-y-4">
+                        <div class="space-y-4" id="card-payment-form">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Card Number</label>
+                                <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Expiration Date</label>
+                                    <input type="text" placeholder="MM/YY" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">CVV</label>
+                                    <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+                            Pay Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-12">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="favicon.svg" alt="odeFlow" class="w-6 h-6">
+                        <span class="text-xl font-bold">odeFlow Mastery</span>
+                    </div>
+                    <p>Empowering developers with AI-powered project management skills.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="text-gray-600 hover:text-gray-900">Courses</a></li>
+                        <li><a href="documentation.html" class="text-gray-600 hover:text-gray-900">Documentation</a></li>
+                        <li><a href="support.html" class="text-gray-600 hover:text-gray-900">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-gray-900">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Connect</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200">
+                <div class="text-center">
+                    <p>&copy; 2025 odeFlow Mastery. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle payment forms based on selected method
+        document.querySelectorAll('input[name="payment-method"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const cardForm = document.getElementById('card-payment-form');
+                if (this.id === 'card') {
+                    cardForm.style.display = 'block';
+                } else {
+                    cardForm.style.display = 'none';
+                }
+            });
+        });
+
+        // Get course details from URL parameters
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseName = urlParams.get('course');
+            const price = urlParams.get('price');
+            
+            if (courseName) {
+                document.getElementById('courseName').textContent = decodeURIComponent(courseName);
+            }
+            if (price) {
+                document.getElementById('coursePrice').textContent = `$${price}`;
+                document.getElementById('totalPrice').textContent = `$${price}`;
+            }
+        });
+    </script>
+</body>
+</html>
